@@ -1,8 +1,10 @@
 package com.htnsoft.htnsoft;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,18 +26,37 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
-    ListView lvKhoaHoc;
-    ArrayList<khoahoc> arrayKhoaHoc;
-    KhoaHocAdapter adapter;
+    Button btnMain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btnMain = (Button) findViewById(R.id.btnMain);
+
+        btnMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent;
+                intent = new Intent(MainActivity.this,SecondActivity.class);
+                String[] arrayCourse ={"ASP", "PHP", "ANDROID"};
+                Student student;
+                student = new Student("Nguyen Van A",1900);
+                intent.putExtra("hocsinh", (Serializable) student);
+
+                intent.putExtra("Mangmonhoc",arrayCourse);
+                intent.putExtra("txtKetQua","Dữ liệu truyền đi");
+
+                startActivity(intent);
+
+            }
+        });
+
     }
 
 }
